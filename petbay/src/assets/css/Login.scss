@@ -1,0 +1,20 @@
+$bg-color: rgb(189, 36, 36);
+$center: center;
+$grid: grid;
+
+.login {
+    background-color: $bg-color;
+    display: $grid;
+    justify-content: $center;
+    align-content: $center;
+    height: 100vh;
+}
+
+.inner {
+    justify-content: $center;
+    align-content: $center;
+    text-align: $center;
+    background-color: white;
+    min-width: 100%;
+    padding: 20px; /* Add padding */
+}
