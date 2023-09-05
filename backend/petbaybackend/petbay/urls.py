@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import LoginUserAPIView
+from .views.pet_views import CREATEPETTYPEAPIVIEW,CREATEPETAPIVIEW
 
 urlpatterns = [
-    path('login/', LoginUserAPIView.as_view(), name='login-user'),
+    path('create_pet/', CREATEPETAPIVIEW.as_view(), name='create_pet'),
+    path('create_pettype/', CREATEPETTYPEAPIVIEW.as_view(), name='create_pettype'),
 ]

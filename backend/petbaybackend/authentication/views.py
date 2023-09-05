@@ -1,12 +1,15 @@
+from django.contrib.auth import authenticate
+from django.shortcuts import render
+
+# Create your views here.
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.http import JsonResponse
+from rest_framework_simplejwt.tokens import RefreshToken
 
-from .models import User
-from .responses import HttpRespEnum
-
-
+from authentication.models.auth_models import User
+from petbay.responses import HttpRespEnum
 class LoginUserAPIView(APIView):
     def post(self, request, *args, **kwargs):
         # Get username and password from the request data
@@ -14,12 +17,14 @@ class LoginUserAPIView(APIView):
         password = request.data.get('password')
 
         # Query the LoginUser model to check if a matching user exists
-        try:
-            user = User.objects.get(email=username, password=password)
-        except User.DoesNotExist:
-            return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+        user = authenticate(username=username, password=password)
 
         if user:
-            return JsonResponse({"status":HttpRespEnum.OK.name,"message":"User Found"})
+
+            refresh = RefreshToken.for_user(user)
+            return JsonResponse({
+                'refresh': str(refresh),
+                'access': str(refresh.access_token),
+            })
         else:
             return JsonResponse({"status": HttpRespEnum.NOT_FOUND.name,"message":"User Not Found"})
