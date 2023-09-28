@@ -42,8 +42,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'authentication',
-    'petbay'
+    'pets'
 ]
+
+AUTH_USER_MODEL = 'authentication.User';
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

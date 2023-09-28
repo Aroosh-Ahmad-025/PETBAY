@@ -8,7 +8,7 @@ from rest_framework import status
 from django.http import JsonResponse
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from authentication.models.auth_models import User
+from authentication.models import User
 from petbay.responses import HttpRespEnum
 class LoginUserAPIView(APIView):
     def post(self, request, *args, **kwargs):
