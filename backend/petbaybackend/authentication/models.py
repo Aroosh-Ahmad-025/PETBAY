@@ -1,4 +1,4 @@
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
@@ -11,9 +11,8 @@ class LoginUser(models.Model):
     class Meta:
         abstract = True
 
-class User(AbstractBaseUser):
+class User(AbstractUser):
     id = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=50)
     email = models.CharField(max_length=50,unique=True)
     password = models.CharField(max_length=50)
 
