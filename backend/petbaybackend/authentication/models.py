@@ -19,4 +19,15 @@ class User(AbstractUser):
     REQUIRED_FIELDS = ["password"]
     USERNAME_FIELD = "email"
 
-    list_display = ("id","name","email")
+    list_display = ("id","email")
+
+    groups = models.ManyToManyField(
+        "auth.Group",
+        related_name="custom_user_set",  
+        blank=True,
+    )
+    user_permissions = models.ManyToManyField(
+        "auth.Permission",
+        related_name="custom_user_set",  
+        blank=True,
+    )

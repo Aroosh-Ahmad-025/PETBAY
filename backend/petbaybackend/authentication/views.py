@@ -9,7 +9,7 @@ from django.http import JsonResponse
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from authentication.models import User
-from petbay.responses import HttpRespEnum
+
 class LoginUserAPIView(APIView):
     def post(self, request, *args, **kwargs):
         # Get username and password from the request data
@@ -27,4 +27,4 @@ class LoginUserAPIView(APIView):
                 'access': str(refresh.access_token),
             })
         else:
-            return JsonResponse({"status": HttpRespEnum.NOT_FOUND.name,"message":"User Not Found"})
+            return JsonResponse({"status": "NotFound","message":"User Not Found"})
